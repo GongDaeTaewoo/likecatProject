@@ -1,0 +1,45 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}
+
+    {% endblock %}
+</head>
+<body>
+{#내비게이션 바 사용#}
+<nav class="navbar navbar-expand-lg bg-light">
+    {#이거 안하면 정렬안됨 내비게이션바랑 같이 사용#}
+    <div class="container-fluid">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link active" href="/accounts/login/">로그인</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="/accounts/register/">회원가입</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'community:free_board' %}">자유게시판</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="picture/">사진게시판</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="myBlog/">나의블로그</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="mypage/">마이페이지</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+<a href="{% url 'community:home' %}"><img src="{% static 'img/home2.jpg' %}"></a>
+{% block content %}
+
+{% endblock %}
+</body>
+</html>

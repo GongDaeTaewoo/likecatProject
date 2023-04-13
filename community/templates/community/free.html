@@ -1,0 +1,23 @@
+{% extends 'community/base.html' %}
+{% block title %}
+    <title>자유게시판</title>
+{% endblock %}
+
+{% block content %}
+    <br>
+    {% if post_list %}
+        <table>
+        {% for post in post_list %}
+            <tr>
+                    <td>{{ post.author }}</td>
+                    <td>{{ post.title }}</td>
+                    <td>{{ post.pub_date }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <p>새글을 작성해주세요!!</p>
+    {% endif %}
+
+    <a href="write/">글쓰기</a>
+{% endblock %}
