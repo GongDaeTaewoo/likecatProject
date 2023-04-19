@@ -1,4 +1,5 @@
 {% extends 'community/base.html' %}
+{#extends 경로가 왜 community/base.html인지 후에 공부! templates폴더부터 찾는것인가?#}
 {% block title %}
     <title>자유게시판</title>
 {% endblock %}
@@ -6,18 +7,29 @@
 {% block content %}
     <br>
     {% if post_list %}
-        <table>
-        {% for post in post_list %}
+        <table class="table">
+            <thead>
             <tr>
-                    <td>{{ post.author }}</td>
-                    <td>{{ post.title }}</td>
-                    <td>{{ post.pub_date }}</td>
+                <th>번호</th>
+                <th>주제</th>
+                <th>작성자</th>
+                <th>제목</th>
+                <th>작성날짜</th>
             </tr>
-        {% endfor %}
-    </table>
+            </thead>
+            {% for post in post_list %}
+                <tr>
+                    <td style="width: 50px">{{ forloop.counter }}</td>
+                    <td style="width: 70px">{{ post.subject }}</td>
+                    <td style="width: 110px">{{ post.author }}</td>
+                    <td style="width: 200px"><a href="{{ post.pk }}">{{ post.title }}</a></td>
+                    <td>{{ post.pub_date }}</td>
+                </tr>
+            {% endfor %}
+        </table>
     {% else %}
         <p>새글을 작성해주세요!!</p>
     {% endif %}
-
+    <a href="{% url 'community:home' %}">홈으로</a>
     <a href="write/">글쓰기</a>
 {% endblock %}

@@ -1,13 +1,11 @@
 {% extends 'community/base.html' %}
-{% load django_bootstrap5 %}
-
 {% block title %}
-    <title>글작성</title>
+    <title>글삭제</title>
 {% endblock %}
 {% block content %}
+    <p>이 글을 정말 삭제하시겠습니까?</p>
     <form action="" method="post">
     {% csrf_token %}
-    {% bootstrap_form form %}
-    <button type="submit" class="btn btn-primary">글작성</button>
+    <button type="submit" class="btn btn-danger">삭제</button>
     </form>
 {% endblock %}

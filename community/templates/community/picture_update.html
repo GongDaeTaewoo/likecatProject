@@ -1,13 +1,14 @@
 {% extends 'community/base.html' %}
 {% load django_bootstrap5 %}
-
 {% block title %}
-    <title>글작성</title>
+    <title>글 수정</title>
 {% endblock %}
 {% block content %}
     <form action="" method="post">
     {% csrf_token %}
-    {% bootstrap_form form %}
-    <button type="submit" class="btn btn-primary">글작성</button>
+        {%  bootstrap_form form %}
+    <button type="submit" class="btn btn-danger">
+        변경
+    </button>
     </form>
 {% endblock %}

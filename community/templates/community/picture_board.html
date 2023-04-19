@@ -1,0 +1,60 @@
+{% extends 'community/base.html' %}
+{% block title %}
+    <title>사진게시판</title>
+{% endblock %}
+
+{% block content %}
+
+
+
+    {#        이런방식으로는 사진게시판을 만들수없음#}
+    {#        <table class="table">#}
+    {#            {% for a in post_list %}#}
+    {#                {% if forloop.counter < 5 %}#}
+    {#                    <tr>#}
+    {#                        {% for post in post_list %}#}
+    {#                            <td>{{ post.picture }}</td>#}
+    {#                        {% endfor %}#}
+    {#                    </tr>#}
+    {#                    <tr>#}
+    {#                        {% for post in post_list %}#}
+    {#                            <td>{{ post.title }}</td>#}
+    {#                        {% endfor %}#}
+    {#                    </tr>#}
+    {#                {% endif %}#}
+    {##}
+    {#                {% if forloop.counter < 9 %}#}
+    {#                    <tr>#}
+    {#                        {% for post in post_list %}#}
+    {#                            <td>{{ post.picture }}</td>#}
+    {#                        {% endfor %}#}
+    {#                    </tr>#}
+    {#                    <tr>#}
+    {#                        {% for post in post_list %}#}
+    {#                            <td>{{ post.title }}</td>#}
+    {#                        {% endfor %}#}
+    {#                    </tr>#}
+    {#                {% endif %}#}
+    {##}
+    {#            {% endfor %}#}
+    {#        </table>#}
+    {% if post_list %}
+        {#        이부분은 https://getbootstrap.kr/docs/5.2/components/card/#%EA%B7%B8%EB%A6%AC%EB%93%9C-%EC%B9%B4%EB%93%9C 에있음#}
+        <div class="row row-cols-1 row-cols-md-4">
+            {% for post in post_list %}
+                <div class="col">
+                    <div class="card w-50 h-50 text-center">
+                        <a href="{% url 'community:picture_detail' post.pk %}">
+                            <img src="{{ post.picture.url }}" class="card-img-top">
+                        </a>
+                        <div class="card-body">
+                            <a href="{% url 'community:picture_detail' post.pk %}" class="card-title">{{ post.title }}</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <br>
+    <a href="{% url 'community:picture_board_write' %}">글쓰기</a>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'community/base.html' %}
+{% block title %}
+    <title>글</title>
+{% endblock %}
+{% block content %}
+    <h1>제목:{{ post.title }}</h1>
+    <p>작성자:{{ post.author }}</p>
+{#    <p>내용:{{ post.content | linebreaksbr |linebreaks }}</p>#}
+    <pre>내용:{{ post.content | linebreaksbr |linebreaks }}</pre>
+    <a href="{% url 'community:free_board' %}" class="btn btn-success">돌아가기</a>
+    <a href="{% url 'community:free_board_edit' post.pk %}" class="btn btn-primary">수정</a>
+    <a href="{% url 'community:free_board_delete' post.pk %}" class="btn btn-danger">삭제</a>
+{% endblock %}

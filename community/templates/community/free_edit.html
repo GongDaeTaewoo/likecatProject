@@ -1,0 +1,16 @@
+{% extends 'community/base.html' %}
+{% load django_bootstrap5 %}
+{% block title %}
+    <title>글수정</title>
+{% endblock %}
+{% block content %}
+    <form action="" method="post">
+    {% bootstrap_form form %}
+    {% csrf_token %}
+    <button type="submit" class="btn btn-success">
+        글 수정
+    </button>
+    <a href="{% url 'community:free_board_detail' pk=pk %}" class="btn btn-danger">돌아가기
+    </a>
+    </form>
+{% endblock %}

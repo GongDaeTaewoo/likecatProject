@@ -1,0 +1,15 @@
+{% extends 'community/base.html' %}
+{% block title %}
+    <title>사진게시물</title>
+{% endblock %}
+{% block content %}
+    <img src="{{ post.picture.url }}">
+    {% if post.picture2 %}
+        <img src="{{ post.picture2.url }}">
+    {% endif %}
+    <p>작성자:{{ post.author }}</p>
+    <pre>내용:{{ post.content }}</pre>
+    <a href="{% url 'community:picture_board' %}" class="btn btn-success">돌아가기</a>
+    <a href="{% url 'community:picture_edit' post.pk %}" class="btn btn-primary">수정</a>
+    <a href="{% url 'community:picture_delete' post.pk %}" class="btn btn-danger">삭제</a>
+{% endblock %}}
