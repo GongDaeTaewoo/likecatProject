@@ -1,5 +1,6 @@
 from django.contrib import admin
 
+from accounts.models import MyUser
 from community.models import FreePost1, FreePicturePost
 
 
@@ -12,3 +13,4 @@ class FreePostAdmin1(admin.ModelAdmin):
 @admin.register(FreePicturePost)
 class FreePicturePostAdmin(admin.ModelAdmin):
     pass
+

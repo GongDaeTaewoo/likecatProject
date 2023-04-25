@@ -1,15 +1,28 @@
-{% extends 'accounts/base.html' %}
 {% load django_bootstrap5 %}
-{% block title %}
-    <title>로그인 좋아</title>
-{% endblock %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
 
-{% block content %}
-    <form action="" method="post">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>로그인 좋아</title>
+</head>
+<body>
+
+<form action="" method="post">
+    <div class="container text-center w-25 position-absolute top-50 start-50 translate-middle ">
+        <a href="{% url 'community:home' %}"><img class="mb-4" src="{% static 'img/home2.jpg' %}"></a>
         {% csrf_token %}
         {% bootstrap_form form %}
-        <button type="submit" class="btn btn-primary">
+
+        <button type='submit' class="btn btn-primary">
             로그인
         </button>
-    </form>
-{% endblock %}
+    </div>
+
+</form>
+
+
+</body>
+</html>

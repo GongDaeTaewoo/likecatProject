@@ -16,4 +16,6 @@ urlpatterns = [
     path('picture/<int:pk>/edit', views.picture_update, name='picture_edit'),
     path('picture/<int:pk>/delete', views.picture_delete, name='picture_delete'),
     path('mypage/', views.my_page, name='my_page'),
+
+
 ]

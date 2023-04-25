@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'community',
     'accounts',
+    'myblog',
     'django_bootstrap5',
 ]
 

@@ -1,7 +1,9 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView
 
+from accounts.forms import MyUserCreationForm, MyUserChangeForm
 from community.forms import FreePostForm, PicturePostForm
 from community.models import FreePost1, FreePicturePost
 
@@ -75,10 +77,12 @@ class PictureCreateView(CreateView):
     template_name = 'community/picture_write.html'
     context_object_name = 'form'
     form_class = PicturePostForm
+
     # detail뷰 작성시 거기로 넘겨주기로 바꿔야함
     # success_url = reverse_lazy('community:picture_board')
     def get_success_url(self):
         return reverse('community:picture_detail', args=[self.object.pk])
+
 
 class PictureUpdateView(UpdateView):
     model = FreePicturePost
@@ -86,6 +90,7 @@ class PictureUpdateView(UpdateView):
     context_object_name = 'form'
     form_class = PicturePostForm
     success_url = reverse_lazy('community:picture_board')
+
     def get_success_url(self):
         return reverse('community:picture_detail', args=[self.object.pk])
 
@@ -108,5 +113,7 @@ picture_detail = PictureDetailView.as_view()
 picture_write = PictureCreateView.as_view()
 picture_delete = PictureDeleteView.as_view()
 
+
+@login_required
 def my_page(request):
-    return render(request,'community/mypage.html')
+    return render(request, 'community/mypage.html')

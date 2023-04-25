@@ -1,0 +1,31 @@
+{% load static %}
+{% load django_bootstrap5 %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입 좋아</title>
+</head>
+<body class="bg-light">
+
+
+<a href="{% url 'community:home' %}">
+    <img src="{% static 'img/home2.jpg' %}" width="300px" height="200px" class="m-4 rounded mx-auto d-block ">
+</a>
+
+
+<form action="" method="post">
+    <div class="container w-50">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button type="submit" class="btn btn-primary">
+            회원가입
+        </button>
+    </div>
+</form>
+
+
+</body>
+</html>

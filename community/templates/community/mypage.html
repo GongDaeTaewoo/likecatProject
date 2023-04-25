@@ -1,10 +1,24 @@
-{% extends 'community/base.html' %}
-{% block title %}
+{% extends 'community/mypage_base.html' %}
+{% block menu %}
 
-    <title>마이페이지</title>
+    <a href="{% url 'community:my_page' %}" class="list-group-item list-group-item-action active" href="">회원정보</a>
+    <a href="{% url 'accounts:my_page_password' %}" class="list-group-item" href="">비밀번호 변경</a>
+    {% if user.first_name and user.last_name and user.gender and user.age and user.univ and user.email and user.job %}
+        <a href="{% url 'accounts:my_page_inf_change' %}" class="list-group-item" href="">회원정보 수정</a>
+    {% else %}
+        <a href="{% url 'accounts:my_page_inf_change' %}" class="list-group-item" href="">회원정보 등록</a>
+    {% endif %}
+
 
 {% endblock %}
+{% block my_content %}
 
-{% block content %}
-    <h1>마이페이지</h1>
+    <p>아이디:{{ user.username }}</p>
+    <p>이름:{{ user.last_name }}{{ user.first_name }}</p>
+    <p>성별:{{ user.gender }}</p>
+    <p>나이:{{ user.age }}</p>
+    <p>대학:{{ user.univ }}</p>
+    <p>직업군:{{ user.job_group }}</p>
+    <p>직업:{{ user.job }}</p>
+    <p>이메일:{{ user.email }}</p>
 {% endblock %}
