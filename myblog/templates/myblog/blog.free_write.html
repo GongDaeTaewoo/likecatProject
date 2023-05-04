@@ -1,0 +1,12 @@
+{% extends 'myblog/base.html' %}
+{% load django_bootstrap5 %}
+{% block title %}
+    <title>{{ user.blog.blog_name }} : 블로그 글 작성</title>
+{% endblock %}
+{% block content %}
+    <form action="" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <button class="btn btn-success" type="submit">글작성</button>
+    </form>
+{% endblock %}

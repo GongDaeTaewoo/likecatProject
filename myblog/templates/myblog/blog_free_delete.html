@@ -1,0 +1,16 @@
+{% extends 'myblog/base.html' %}
+{% block title %}
+
+    <title>{{ post.title }} : 블로그 게시물 삭제</title>
+{% endblock %}
+{% block content %}
+    <p class="fs-2">글을 삭제하시겠습니까?</p>
+    <form action="" method="POST">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-success">
+        삭제
+    </button>
+    </form>
+
+
+{% endblock %}

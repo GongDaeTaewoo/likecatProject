@@ -1,0 +1,23 @@
+{% extends 'myblog/base.html' %}
+{% block title %}
+
+    <title>{{ user.blog.blog_name }}블로그 자유게시판</title>
+{% endblock %}
+{% block content %}
+    {% if post_list %}
+        <div class="text-center">
+            <img width="200px" height="200px" src={{ blog_user.avatar.url }}>
+            <ul class="list-group">
+                {% for post in post_list %}
+                    <p class="list-group-item">{{ forloop.counter }}</p>
+                    <a class="list-group-item" href="{% url 'myblog:blog_free_detail' userid=blog_user.username pk=post.pk %}">{{ post.title }}</a>
+                {% endfor %}
+            </ul>
+        </div>
+
+    {% else %}
+        <p>새 포스팅을 작성해보세요!</p>
+    {% endif %}
+    <a href="{% url 'myblog:blog_free_write' blog_user.username %}">글쓰기</a>
+    <a href="{% url 'myblog:myblog' blog_user.username %}">돌아가기</a>
+{% endblock %}

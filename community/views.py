@@ -83,6 +83,12 @@ class PictureCreateView(CreateView):
     def get_success_url(self):
         return reverse('community:picture_detail', args=[self.object.pk])
 
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.author = '익명'
+        self.object.save()
+        return super().form_valid(form)
+
 
 class PictureUpdateView(UpdateView):
     model = FreePicturePost

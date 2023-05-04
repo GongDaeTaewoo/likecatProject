@@ -1,0 +1,14 @@
+{% extends 'myblog/base.html' %}
+{% load django_bootstrap5 %}
+{% block title %}
+
+<title>{{ post.title }} : 블로그 게시글 수정</title>
+{% endblock %}
+{% block content %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <p>글을 수정하시겠습니까?</p>
+        <button type="submit" class="btn btn-primary">수정</button>
+    </form>
+{% endblock %}
