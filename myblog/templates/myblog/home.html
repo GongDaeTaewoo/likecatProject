@@ -1,10 +1,55 @@
 {% extends 'myblog/base.html' %}
-{% block title %}
 
+
+
+{% block title %}
+    <style>
+        a {
+            text-decoration: none;
+        }
+    </style>
     <title>블로그</title>
 {% endblock %}
 {% block content %}
     <h1>블로그 랭킹</h1>
+    {% for user in user_list %}
+        {% if forloop.counter == 1 %}
+            <a href="{% url 'myblog:myblog' user.username %}"><p class="fs-2 text-primary">
+                1.{{ user.blog.blog_name }}</p></a>
+
+            {% if user.avatar %}
+                <img width="100px" height="100px" src="{{ user.avatar.url }}">
+            {% endif %}
+            <p>받은 추천수:{{ user.blog.recommend }}</p>
+
+        {% elif forloop.counter == 2 %}
+
+            <a href="{% url 'myblog:myblog' user.username %}"><p class="fs-3 text-danger">
+                2.{{ user.blog.blog_name }}</p></a>
+            {% if user.avatar %}
+                <img width="100px" height="100px" src="{{ user.avatar.url }}">
+            {% endif %}
+            <p>받은 추천수:{{ user.blog.recommend }}</p>
+
+        {% elif forloop.counter == 3 %}
+
+            <a href="{% url 'myblog:myblog' user.username %}"><p class="fs-4 text-success">
+                3.{{ user.blog.blog_name }}</p></a>
+            {% if user.avatar %}
+                <img width="100px" height="100px" src="{{ user.avatar.url }}">
+            {% endif %}
+            <p>받은 추천수:{{ user.blog.recommend }}</p>
+        {% else %}
+
+            <a href="{% url 'myblog:myblog' user.username %}"><p
+                    class="text-secondary">{{ forloop.counter }}.{{ user.blog.blog_name }}</p></a>
+            {% if user.avatar %}
+                <img width="100px" height="100px" src="{{ user.avatar.url }}">
+            {% endif %}
+            <p>받은 추천수:{{ user.blog.recommend }}</p>
+        {% endif %}
+
+    {% endfor %}
     {% if my_blog %}
         <a href="{% url 'myblog:myblog' user.username %}">나의블로그</a>
     {% else %}

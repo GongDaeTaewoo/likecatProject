@@ -1,9 +1,29 @@
 {% extends 'myblog/base.html' %}
 {% block title %}
-<title>{{ user.blog.blog_name }} : 블로그 사진게시판</title>
+    <title>{{ user.blog.blog_name }} : 블로그 사진게시판</title>
 
 {% endblock %}
 {% block content %}
 
-   
+    {% if not post_list %}
+        <p>새글을 작성해보세요!</p>
+    {% endif %}
+
+    <div class="container text-center mt-4">
+        <div class="row row-cols-4 g-4">
+            {% for post in post_list %}
+                <div class="col">
+                    <div class="card">
+                        <a href="{% url 'myblog:blog_photo_detail' user.username post.pk %}"><img class="card-img-top" width="150px" height="150px" src="{{ post.photo.url }}"></a>
+                        <div class="card-body">
+                            <a href="{% url 'myblog:blog_photo_detail' user.username post.pk %}" class="card-text">{{ post.title }}</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    <br>
+    <a href="{% url 'myblog:blog_photo_write' user.username %}" class="btn btn-primary">글쓰기</a>
+    <a href="{% url 'myblog:myblog' user.username %}" class="btn btn-secondary">돌아가기</a>
+    </div>
 {% endblock %}

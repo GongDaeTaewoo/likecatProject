@@ -1,9 +1,19 @@
 {% extends 'myblog/base.html' %}
 {% block title %}
-
+    <title>{{ post.title }} : 블로그 게시글</title>
 
 {% endblock %}
 {% block content %}
+    <div class="position-absolute top-50 start-50 translate-middle text-center">
+        <h1 class="fs-5 text-primary">{{ post.subject }}</h1>
+        <h2 class="fs-2">{{ post.title }}</h2>
+        <p class="text-muted">작성자:{{ post.author }}</p>
+        <img width="600px" height="400px" src="{{ post.photo.url }}">
+        <p>{{ post.content }}</p>
+        <p> 수정날짜:{{ post.update_date }}</p>
+        <a class="btn btn-success" href="{% url 'myblog:blog_photo_board' user.username %}">돌아가기</a>
+        <a class="btn btn-primary" href="{% url 'myblog:blog_photo_edit' user.username post.pk %}">수정</a>
+        <a class="btn btn-danger" href="{% url 'myblog:blog_photo_delete' user.username post.pk%}">삭제</a>
+    </div>
 
-
-{% endblock %}>
+{% endblock %}

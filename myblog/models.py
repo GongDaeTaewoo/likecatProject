@@ -9,6 +9,8 @@ class MyBlog(models.Model):
     # 블로그 이름, 블로그에서 닉네임으로 활용
     blog_name = models.CharField(max_length=20,default="익명의 블로그")
     blog_intro= models.TextField(default="블로그 설명을 작성해주세요")
+    def __str__(self):
+        return self.blog_name
 class MyBlogPost(models.Model):
     blog = models.ForeignKey(MyBlog, on_delete=models.CASCADE)
     author = models.CharField(max_length=25)

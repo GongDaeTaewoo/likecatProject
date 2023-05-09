@@ -1,9 +1,18 @@
 {% extends 'myblog/base.html' %}
+{% load django_bootstrap5 %}
+{% load static %}
 {% block title %}
 
 
 {% endblock %}
 {% block content %}
+    <div class="text-center">
+    <img width="150px" height="200px" src="{% static 'img/delete cat.png' %}">
+        <h1>정말로 삭제하시겠습니까?</h1>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">삭제</button>
 
-   
+        </form>
+    </div>
 {% endblock %}

@@ -2,18 +2,22 @@ from django.contrib.auth import get_user_model
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView
 
+from accounts.models import MyUser
 from likecatProject import settings
 from myblog.forms import BlogCreateForm, BlogFreePostForm, BlogFreePhotoForm
 from myblog.models import MyBlogPost, MyBlog, MyBlogPhotoPost
 
 
 def home(request):
+    user_list = MyUser.objects.all().order_by('-blog__recommend').filter(blog__recommend__isnull=False)
+    # blog_list=MyBlog.objects.all().order_by('-recommend')
+
     if request.user.is_authenticated:
         my_blog = request.user.blog
-        return render(request, 'myblog/home.html', {'my_blog': my_blog})
+        return render(request, 'myblog/home.html', {'my_blog': my_blog,'user_list':user_list})
     else:
         my_blog=False
-        return render(request, 'myblog/home.html',{'my_blog':my_blog })
+        return render(request, 'myblog/home.html',{'my_blog':my_blog,'user_list':user_list })
 
 
 
@@ -98,7 +102,7 @@ def blog_photo(request, userid):
 
 def blog_photo_detail(request, userid, pk):
     post = get_object_or_404(MyBlogPhotoPost, pk=pk)
-    return render(request, {'post': post})
+    return render(request, 'myblog/blog_photo_detail.html', {'post': post})
 
 
 def blog_photo_write(request, userid):
@@ -111,28 +115,36 @@ def blog_photo_write(request, userid):
             post.blog = user.blog
             post.author = user.username
             post.save()
-            return redirect('myblog:blog_photo_detail', pk=post.pk,username=userid)
+            return redirect('myblog:blog_photo_detail', pk=post.pk,userid=userid)
     else:
         form = BlogFreePhotoForm()
-        return render(request, 'myblog/blog_photo_write.html', {'form': form})
+        return render(request, 'myblog/blog_photo_write.html', {'form': form,'user':user})
 
 
 def blog_photo_edit(request, userid, pk):
-    post = get_object_or_404(pk=pk)
+    post = get_object_or_404(MyBlogPhotoPost,pk=pk)
     if request.method == "POST":
         form = BlogFreePhotoForm(request.POST,request.FILES,instance=post)
         if form.is_valid():
             form.save()
-            return redirect('myblog:blog_photo_detail', username=userid,pk=pk)
+            return redirect('myblog:blog_photo_detail', userid=userid,pk=pk)
 
     else:
         form = BlogFreePhotoForm(instance=post)
-        render(request,'myblog/blog_photo_edit.html',{'form':form})
+        return render(request,'myblog/blog_photo_edit.html',{'form':form})
 
 
 def blog_photo_delete(request, userid, pk):
     if request.method == "POST":
         post = get_object_or_404(MyBlogPhotoPost,pk=pk)
         post.delete()
+        return redirect('myblog:blog_photo_board',userid=userid)
     else:
-        render(request,'myblog/blog_photo_delete.html')
+        return render(request,'myblog/blog_photo_delete.html')
+
+def blog_recommend(request,userid):
+    user = get_object_or_404(get_user_model(),username=userid)
+    blog = user.blog
+    blog.recommend+=1
+    blog.save()
+    return redirect('myblog:myblog', userid=userid)

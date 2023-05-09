@@ -11,11 +11,17 @@
         <p class="fs-5">{{ blog.blog_name }}</p>
         <p class="fs-6">({{ blog_user.username }})</p>
         <p>블로그 설명:{{ blog.blog_intro }}</p>
+        <a href="{% url 'myblog:blog_recommend' user.username %}" class="btn btn-primary">블로그 추천
+            <span class="badge text-bg-secondary">{{ blog.recommend }}</span>
+        </a>
+
+
+        <br>
     {% else %}
         <p>{{ blog_user.username }}</p>
         <p>블로그 설명:{{ blog.blog_intro }}</p>
     {% endif %}
-    <a href="{% url 'myblog:blog_free_board' user.username %}">나의 자유게시판</a>
+    <a href="{% url 'myblog:blog_free_board' blog_user.username %}">나의 자유게시판</a>
     <br>
-    <a href="">나의 사진게시판</a>
+    <a href="{% url 'myblog:blog_photo_board' blog_user.username %}">나의 사진게시판</a>
 {% endblock %}
