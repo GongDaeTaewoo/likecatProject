@@ -7,11 +7,13 @@
 
     <p class="fs-5 text-muted">{{ post.subject }}</p>
     <p class="fs-2">{{ post.title }}</p>
-    <img width="70px" height="70px" src="{{ user.avatar.url }}">
+    <img width="70px" height="70px" src="{{ blog_user.avatar.url }}">
     <p>{{ user.username }}</p>
     <p>{{ post.update_date }}</p>
     <p class="fs-4">{{ post.content }}</p>
-    <a class="btn btn-success" href="{% url 'myblog:blog_free_board' user.username %}">돌아가기</a>
-    <a class="btn btn-primary" href="{% url 'myblog:blog_free_edit' user.username post.pk  %}">수정</a>
-    <a class="btn btn-danger" href="{% url 'myblog:blog_free_delete' user.username post.pk  %}">삭제</a>
+    <a class="btn btn-success" href="{% url 'myblog:blog_free_board' blog_user.username %}">돌아가기</a>
+    {% if user.username == blog_user.username %}
+        <a class="btn btn-primary" href="{% url 'myblog:blog_free_edit' blog_user.username post.pk %}">수정</a>
+        <a class="btn btn-danger" href="{% url 'myblog:blog_free_delete' blog_user.username post.pk %}">삭제</a>
+    {% endif %}
 {% endblock %}

@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView
 
@@ -10,15 +11,18 @@ from myblog.models import MyBlogPost, MyBlog, MyBlogPhotoPost
 
 def home(request):
     user_list = MyUser.objects.all().order_by('-blog__recommend').filter(blog__recommend__isnull=False)
-    # blog_list=MyBlog.objects.all().order_by('-recommend')
-
+    # 로그인시만 나의블로그 render
     if request.user.is_authenticated:
         my_blog = request.user.blog
-        return render(request, 'myblog/home.html', {'my_blog': my_blog,'user_list':user_list})
     else:
-        my_blog=False
-        return render(request, 'myblog/home.html',{'my_blog':my_blog,'user_list':user_list })
+        my_blog = False
+    return render(request, 'myblog/home.html', {'my_blog': my_blog, 'user_list': user_list})
 
+
+def blog_search(request):
+    q = request.GET.get('q', '')
+    blog_user_list = MyUser.objects.all().filter(blog__blog_name__icontains=q)
+    return render(request, 'myblog/blog_search.html', {'blog_user_list': blog_user_list, 'q': q})
 
 
 def myblog(request, userid):
@@ -27,6 +31,7 @@ def myblog(request, userid):
     return render(request, 'myblog/myblog.html', {'blog': blog, 'blog_user': user})
 
 
+@login_required()
 def blog_create(request, userid):
     user = get_object_or_404(get_user_model(), username=userid)
     if request.method == "POST":
@@ -53,10 +58,12 @@ def blog_free(request, userid):
 
 
 def blog_free_detail(request, userid, pk):
+    blog_user = get_object_or_404(get_user_model(), username=userid)
     post = get_object_or_404(MyBlogPost, pk=pk)
-    return render(request, 'myblog/blog_free_detail.html', {'post': post})
+    return render(request, 'myblog/blog_free_detail.html', {'post': post, 'blog_user': blog_user})
 
 
+@login_required()
 def blog_free_write(request, userid):
     user = get_object_or_404(get_user_model(), username=userid)
     if request.method == "POST":
@@ -65,13 +72,14 @@ def blog_free_write(request, userid):
         post.blog = user.blog
         post.author = user.username
         post.save()
-        return redirect('myblog:blog_free_detail', userid=userid,pk=post.pk)
+        return redirect('myblog:blog_free_detail', userid=userid, pk=post.pk)
     else:
 
         form = BlogFreePostForm()
         return render(request, 'myblog/blog.free_write.html', {'form': form})
 
 
+@login_required()
 def blog_free_edit(request, userid, pk):
     post = get_object_or_404(MyBlogPost, pk=pk)
     if request.method == "POST":
@@ -85,26 +93,29 @@ def blog_free_edit(request, userid, pk):
         return render(request, 'myblog/blog_free_edit.html', {'form': form})
 
 
+@login_required()
 def blog_free_delete(request, userid, pk):
     post = get_object_or_404(MyBlogPost, pk=pk)
     if request.method == "POST":
         post.delete()
-        return redirect('myblog:blog_free_board',userid=userid)
+        return redirect('myblog:blog_free_board', userid=userid)
     else:
-        return render(request, 'myblog/blog_free_delete.html',{'post':post})
+        return render(request, 'myblog/blog_free_delete.html', {'post': post})
 
 
 def blog_photo(request, userid):
-    user = get_object_or_404(get_user_model(), username=userid)
-    post_list = MyBlogPhotoPost.objects.all().order_by('-pub_date').filter(blog=user.blog)
-    return render(request, 'myblog/blog_photo.html', {'post_list': post_list})
+    blog_user = get_object_or_404(get_user_model(), username=userid)
+    post_list = MyBlogPhotoPost.objects.all().order_by('-pub_date').filter(blog=blog_user.blog)
+    return render(request, 'myblog/blog_photo.html', {'post_list': post_list, 'blog_user': blog_user})
 
 
 def blog_photo_detail(request, userid, pk):
+    blog_user = get_object_or_404(get_user_model(), username=userid)
     post = get_object_or_404(MyBlogPhotoPost, pk=pk)
-    return render(request, 'myblog/blog_photo_detail.html', {'post': post})
+    return render(request, 'myblog/blog_photo_detail.html', {'post': post, 'blog_user': blog_user})
 
 
+@login_required()
 def blog_photo_write(request, userid):
     user = get_object_or_404(get_user_model(), username=userid)
 
@@ -115,36 +126,41 @@ def blog_photo_write(request, userid):
             post.blog = user.blog
             post.author = user.username
             post.save()
-            return redirect('myblog:blog_photo_detail', pk=post.pk,userid=userid)
+            return redirect('myblog:blog_photo_detail', pk=post.pk, userid=userid)
     else:
         form = BlogFreePhotoForm()
-        return render(request, 'myblog/blog_photo_write.html', {'form': form,'user':user})
+        return render(request, 'myblog/blog_photo_write.html', {'form': form, 'user': user})
 
 
+@login_required()
 def blog_photo_edit(request, userid, pk):
-    post = get_object_or_404(MyBlogPhotoPost,pk=pk)
+    post = get_object_or_404(MyBlogPhotoPost, pk=pk)
     if request.method == "POST":
-        form = BlogFreePhotoForm(request.POST,request.FILES,instance=post)
+        form = BlogFreePhotoForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
             form.save()
-            return redirect('myblog:blog_photo_detail', userid=userid,pk=pk)
+            return redirect('myblog:blog_photo_detail', userid=userid, pk=pk)
 
     else:
         form = BlogFreePhotoForm(instance=post)
-        return render(request,'myblog/blog_photo_edit.html',{'form':form})
+        return render(request, 'myblog/blog_photo_edit.html', {'form': form})
 
 
+@login_required()
 def blog_photo_delete(request, userid, pk):
     if request.method == "POST":
-        post = get_object_or_404(MyBlogPhotoPost,pk=pk)
+        post = get_object_or_404(MyBlogPhotoPost, pk=pk)
         post.delete()
-        return redirect('myblog:blog_photo_board',userid=userid)
+        return redirect('myblog:blog_photo_board', userid=userid)
     else:
-        return render(request,'myblog/blog_photo_delete.html')
+        return render(request, 'myblog/blog_photo_delete.html')
 
-def blog_recommend(request,userid):
-    user = get_object_or_404(get_user_model(),username=userid)
-    blog = user.blog
-    blog.recommend+=1
-    blog.save()
+
+@login_required()
+def blog_recommend(request, userid):
+    user = get_object_or_404(get_user_model(), username=userid)
+    if request.user.username != user.username:
+        blog = user.blog
+        blog.recommend += 1
+        blog.save()
     return redirect('myblog:myblog', userid=userid)

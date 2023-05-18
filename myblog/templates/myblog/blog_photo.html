@@ -5,7 +5,7 @@
 {% endblock %}
 {% block content %}
 
-    {% if not post_list %}
+    {% if not post_list and user.username == blog_user.username %}
         <p>새글을 작성해보세요!</p>
     {% endif %}
 
@@ -14,16 +14,20 @@
             {% for post in post_list %}
                 <div class="col">
                     <div class="card">
-                        <a href="{% url 'myblog:blog_photo_detail' user.username post.pk %}"><img class="card-img-top" width="150px" height="150px" src="{{ post.photo.url }}"></a>
+                        <a href="{% url 'myblog:blog_photo_detail' blog_user.username post.pk %}"><img
+                                class="card-img-top" width="150px" height="150px" src="{{ post.photo.url }}"></a>
                         <div class="card-body">
-                            <a href="{% url 'myblog:blog_photo_detail' user.username post.pk %}" class="card-text">{{ post.title }}</a>
+                            <a href="{% url 'myblog:blog_photo_detail' blog_user.username post.pk %}"
+                               class="card-text">{{ post.title }}</a>
                         </div>
                     </div>
                 </div>
             {% endfor %}
         </div>
-    <br>
-    <a href="{% url 'myblog:blog_photo_write' user.username %}" class="btn btn-primary">글쓰기</a>
-    <a href="{% url 'myblog:myblog' user.username %}" class="btn btn-secondary">돌아가기</a>
+        <br>
+        {% if user.username == blog_user.username %}
+            <a href="{% url 'myblog:blog_photo_write' blog_user.username %}" class="btn btn-primary">글쓰기</a>
+        {% endif %}
+        <a href="{% url 'myblog:myblog' blog_user.username %}" class="btn btn-secondary">돌아가기</a>
     </div>
 {% endblock %}

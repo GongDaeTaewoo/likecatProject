@@ -10,14 +10,19 @@
             <ul class="list-group">
                 {% for post in post_list %}
                     <p class="list-group-item">{{ forloop.counter }}</p>
-                    <a class="list-group-item" href="{% url 'myblog:blog_free_detail' userid=blog_user.username pk=post.pk %}">{{ post.title }}</a>
+                    <a class="list-group-item"
+                       href="{% url 'myblog:blog_free_detail' userid=blog_user.username pk=post.pk %}">{{ post.title }}</a>
                 {% endfor %}
             </ul>
         </div>
 
     {% else %}
-        <p>새 포스팅을 작성해보세요!</p>
+        {% if user.username == blog_user.username %}
+            <p>새 포스팅을 작성해보세요!</p>
+        {% endif %}
     {% endif %}
-    <a href="{% url 'myblog:blog_free_write' blog_user.username %}">글쓰기</a>
+    {% if user.username == blog_user.username %}
+        <a href="{% url 'myblog:blog_free_write' blog_user.username %}">글쓰기</a>
+    {% endif %}
     <a href="{% url 'myblog:myblog' blog_user.username %}">돌아가기</a>
 {% endblock %}

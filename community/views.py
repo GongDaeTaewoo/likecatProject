@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView
@@ -13,8 +14,11 @@ def home(request):
 
 
 def free(request):
+    page = request.GET.get('page', '1')
     post_list = FreePost1.objects.all().order_by('-pub_date')
-    context = {"post_list": post_list}
+    paginator = Paginator(post_list, 8)
+    page_obj = paginator.get_page(page)
+    context = {"page_obj": page_obj}
     return render(request, 'community/free.html', context=context)
 
 

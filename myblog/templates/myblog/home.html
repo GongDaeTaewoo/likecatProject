@@ -58,4 +58,8 @@
         {% endif %}
     {% endif %}
     <h2>블로그 검색</h2>
+    <form action="{% url 'myblog:blog_search' %}" method="GET">
+        <input type="search" name="q">
+        <button type="submit">검색</button>
+    </form>
 {% endblock %}

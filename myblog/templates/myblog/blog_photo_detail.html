@@ -11,9 +11,11 @@
         <img width="600px" height="400px" src="{{ post.photo.url }}">
         <p>{{ post.content }}</p>
         <p> 수정날짜:{{ post.update_date }}</p>
-        <a class="btn btn-success" href="{% url 'myblog:blog_photo_board' user.username %}">돌아가기</a>
-        <a class="btn btn-primary" href="{% url 'myblog:blog_photo_edit' user.username post.pk %}">수정</a>
-        <a class="btn btn-danger" href="{% url 'myblog:blog_photo_delete' user.username post.pk%}">삭제</a>
+        <a class="btn btn-success" href="{% url 'myblog:blog_photo_board' blog_user.username %}">돌아가기</a>
+        {% if user.username == blog_user.username %}
+            <a class="btn btn-primary" href="{% url 'myblog:blog_photo_edit' blog_user.username post.pk %}">수정</a>
+            <a class="btn btn-danger" href="{% url 'myblog:blog_photo_delete' blog_user.username post.pk %}">삭제</a>
+        {% endif %}
     </div>
 
 {% endblock %}

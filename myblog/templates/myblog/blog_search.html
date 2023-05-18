@@ -1,0 +1,31 @@
+{% extends 'myblog/base.html' %}
+{% block title %}
+    <title>블로그 검색</title>
+    <style>
+    a {
+        text-decoration: none;
+    }
+    </style>
+{% endblock %}
+{% block content %}
+    {% if q and blog_user_list %}
+        {% for blog_user in blog_user_list %}
+            {% if blog_user.avatar %}
+                <img height="200px" width="200px" src="{{ blog_user.avatar.url }}">
+                <br>
+            {% endif %}
+            <a href="{% url 'myblog:myblog' blog_user.username %}">{{ blog_user.blog.blog_name }} 의블로그</a>
+            <p>{{ blog_user.blog.blog_intro }}</p>
+        {% endfor %}
+    {% elif q and not blog_user_list %}
+        <
+        <h1>검색하신 블로그가 없습니다 : {{ q }}</h1>
+    {% else %}
+        <h1>검색어를 입력해주세요</h1>
+    {% endif %}
+    <form action="{% url 'myblog:blog_search' %}" method="GET">
+        <input type="search" name="q">
+        <button type="submit">검색</button>
+    </form>
+
+{% endblock %}

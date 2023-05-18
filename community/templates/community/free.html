@@ -6,30 +6,56 @@
 
 {% block content %}
     <br>
-    {% if post_list %}
-        <table class="table">
-            <thead>
-            <tr>
-                <th>번호</th>
-                <th>주제</th>
-                <th>작성자</th>
-                <th>제목</th>
-                <th>작성날짜</th>
-            </tr>
-            </thead>
-            {% for post in post_list %}
+    <div class="">
+        {% if page_obj %}
+            <table class="table">
+                <thead>
                 <tr>
-                    <td style="width: 50px">{{ forloop.counter }}</td>
-                    <td style="width: 70px">{{ post.subject }}</td>
-                    <td style="width: 110px">{{ post.author }}</td>
-                    <td style="width: 200px"><a href="{{ post.pk }}">{{ post.title }}</a></td>
-                    <td>{{ post.pub_date }}</td>
+                    <th>번호</th>
+                    <th>주제</th>
+                    <th>작성자</th>
+                    <th>제목</th>
+                    <th>작성날짜</th>
                 </tr>
-            {% endfor %}
-        </table>
-    {% else %}
-        <p>새글을 작성해주세요!!</p>
-    {% endif %}
-    <a href="{% url 'community:home' %}">홈으로</a>
-    <a href="write/">글쓰기</a>
+                </thead>
+                {% for post in page_obj %}
+                    <tr>
+                        <td style="width: 50px">{{ forloop.counter }}</td>
+                        <td style="width: 70px">{{ post.subject }}</td>
+                        <td style="width: 110px">{{ post.author }}</td>
+                        <td style="width: 200px"><a href="{{ post.pk }}">{{ post.title }}</a></td>
+                        <td>{{ post.pub_date }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">이전</a>
+                    </li>
+                {% else %}
+                    <li class="page-item"><a class="page-link" href="">이전</a></li>
+                {% endif %}
+                {% for page_number in page_obj.paginator.page_range %}
+                    {% if page_number|add:-5 <= page_obj.number and page_number|add:5 >= page_obj.number %}
+                        {% if page_number == page_obj.number %}
+                            <li class="page-item active"><a class="page-link" href="">{{ page_number }}</a></li>
+                        {% else %}
+                            <li class="page-item"><a class="page-link"
+                                                     href="?page={{ page_number }}">{{ page_number }}</a>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                {% if page_obj.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">다음</a></li>
+                {% else %}
+                    <li class="page-item"><a class="page-link" href="">다음</a></li>
+                {% endif %}
+            </ul>
+        {% else %}
+            <p>새글을 작성해주세요!!</p>
+        {% endif %}
+        <a href="{% url 'community:home' %}">홈으로</a>
+        <a href="write/">글쓰기</a>
+    </div>
 {% endblock %}

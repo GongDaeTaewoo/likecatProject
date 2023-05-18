@@ -1,9 +1,29 @@
 {% extends 'community/base.html' %}
+{% load static %}
 {% block title %}
 
-     <title>고양이 좋아</title>
+    <title>고양이 좋아</title>
 
 {% endblock %}
 
 {% block content %}
+    <div class="position-relative">
+        <div class="position-absolute top-50 start-50 translate-middle-x">
+            <h1 class="fw-bold text-center">고양이 커뮤니티'고양이가 좋아'</h1>
+            <img class="rounded mb-2" width="351px" height="200px" src="{% static 'img/9.jpeg' %}">
+            <img class="rounded mb-2" width="351px" height="200px" src="{% static 'img/10.jpeg' %}">
+            <img class="rounded" width="351px" height="200px" src="{% static 'img/11.jpeg' %}">
+            <img class="rounded" width="351px" height="200px" src="{% static 'img/12.jpeg' %}">
+
+
+            <br>
+
+            <div class="d-grid gap-1">
+                <a class="btn btn-primary" href="{% url 'accounts:register' %}">회원가입 하러가기</a>
+                <a class="btn btn-success" href="{% url 'community:free_board' %}">자유게시판 바로가기</a>
+                <a class="btn btn-warning" href="{% url 'community:picture_board' %}">사진게시판 바로가기</a>
+                <a class="btn btn-secondary" href="{% url 'myblog:home' %}">블로그 바로가기</a>
+            </div>
+        </div>
+    </div>
 {% endblock %}

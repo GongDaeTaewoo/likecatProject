@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import login, get_user_model, update_session_auth_hash
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect
 
@@ -19,6 +20,7 @@ def register(request):
     return render(request, 'accounts/register.html', {"form": form})
 
 
+@login_required
 def my_page_password(request):
     if request.method == "POST":
         form = PasswordChangeForm(request.user,request.POST)
@@ -32,7 +34,7 @@ def my_page_password(request):
         form = PasswordChangeForm(request.user)
         return render(request, 'community/mypage_password.html', {'form': form})
 
-
+@login_required()
 def my_page_inf_change(request):
     if request.method == "POST":
         form = MyUserChangeForm(request.POST, instance=request.user)

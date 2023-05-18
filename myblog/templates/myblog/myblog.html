@@ -11,7 +11,7 @@
         <p class="fs-5">{{ blog.blog_name }}</p>
         <p class="fs-6">({{ blog_user.username }})</p>
         <p>블로그 설명:{{ blog.blog_intro }}</p>
-        <a href="{% url 'myblog:blog_recommend' user.username %}" class="btn btn-primary">블로그 추천
+        <a href="{% url 'myblog:blog_recommend' blog_user.username %}" class="btn btn-primary">블로그 추천
             <span class="badge text-bg-secondary">{{ blog.recommend }}</span>
         </a>
 
