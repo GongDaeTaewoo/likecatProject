@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import json
+
+from django.conf.global_settings import STATIC_ROOT
 from django.core.exceptions import ImproperlyConfigured
 import os
 from pathlib import Path
@@ -25,9 +27,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.pythonanywhere.com']
 
 # Application definition
 
@@ -120,7 +122,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
-
+STATIC_ROOT=os.path.join(BASE_DIR,'staticroot')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
