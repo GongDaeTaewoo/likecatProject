@@ -42,7 +42,7 @@ def blog_create(request, userid):
         blog.save()
         user.blog = blog
         if not user.avatar:
-            user.avatar = request.POST.get('avatar')
+            user.avatar = request.FILES.get('avatar')
         user.save()
 
         return redirect('myblog:myblog', userid=userid)

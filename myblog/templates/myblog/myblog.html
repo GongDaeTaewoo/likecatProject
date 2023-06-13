@@ -1,11 +1,11 @@
 {% extends 'myblog/base.html' %}
 {% block title %}
-    <title>{{ user.username }}님의 블로그</title>
+    <title>{{ blog_user.username }}님의 블로그</title>
 
 {% endblock %}
 {% block content %}
-    {% if user.avatar %}
-        <img width="200px" height="200px" src="{{ user.avatar.url }}">
+    {% if blog_user.avatar %}
+        <img width="200px" height="200px" src="{{ blog_user.avatar.url }}">
     {% endif %}
     {% if blog.blog_name %}
         <p class="fs-5">{{ blog.blog_name }}</p>
@@ -21,7 +21,7 @@
         <p>{{ blog_user.username }}</p>
         <p>블로그 설명:{{ blog.blog_intro }}</p>
     {% endif %}
-    <a href="{% url 'myblog:blog_free_board' blog_user.username %}">나의 자유게시판</a>
+    <a href="{% url 'myblog:blog_free_board' blog_user.username %}">자유게시판</a>
     <br>
-    <a href="{% url 'myblog:blog_photo_board' blog_user.username %}">나의 사진게시판</a>
+    <a href="{% url 'myblog:blog_photo_board' blog_user.username %}">사진게시판</a>
 {% endblock %}
