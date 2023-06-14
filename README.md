@@ -32,6 +32,7 @@
 - 개인블로그
 ![bandicam 2023-05-19 19-50-40-989](https://github.com/GongDaeTaewoo/likecatProject/assets/89184708/054e1b1e-9a4c-4a61-84c8-a714d7b06e32)
 - 블로그홈
-![bandicam 2023-05-19 19-49-20-482](https://github.com/GongDaeTaewoo/likecatProject/assets/89184708/25d648b0-b8d4-4a02-aa0b-ea9798610890)
+![bandicam 2023-05-19 19-57-08-163](https://github.com/GongDaeTaewoo/likecatProject/assets/89184708/548b0f27-80ee-4390-991c-b5497eb0a689)
+
 
 
