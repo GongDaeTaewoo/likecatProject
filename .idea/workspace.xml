@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="059f9401-954a-4c44-92e1-c0db3cf7862b" name="Changes" comment="girignore위치">
+    <list default="true" id="059f9401-954a-4c44-92e1-c0db3cf7862b" name="Changes" comment="배포">
+      <change afterPath="$PROJECT_DIR$/myblog/migrations/0006_alter_myblogphotopostcomment_content_and_more.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/likecatProject/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/likecatProject/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -28,6 +34,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2ODtmxIS0rRXF0J23gJlLXHOR96" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -45,7 +54,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "last_opened_file_path": "C:/Users/yun68/Desktop/likecatProject",
-    "settings.editor.selected.configurable": "editor.preferences.gutterIcons"
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -116,7 +125,23 @@
       <workItem from="1685689175523" duration="27000" />
       <workItem from="1686226285176" duration="599000" />
       <workItem from="1686309833317" duration="2247000" />
-      <workItem from="1686656094020" duration="2766000" />
+      <workItem from="1686656094020" duration="3558000" />
+      <workItem from="1686661015040" duration="1230000" />
+      <workItem from="1686747312131" duration="1420000" />
+      <workItem from="1686814370818" duration="4515000" />
+      <workItem from="1686825965176" duration="1091000" />
+      <workItem from="1686889475823" duration="1568000" />
+      <workItem from="1687350286314" duration="776000" />
+      <workItem from="1688538529871" duration="489000" />
+      <workItem from="1689759785767" duration="371000" />
+      <workItem from="1689760178384" duration="5216000" />
+      <workItem from="1689812774049" duration="23172000" />
+      <workItem from="1690044683942" duration="306000" />
+      <workItem from="1690244148160" duration="1002000" />
+      <workItem from="1690249772448" duration="12290000" />
+      <workItem from="1690793536272" duration="599000" />
+      <workItem from="1690794159022" duration="13000" />
+      <workItem from="1690794404385" duration="19000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1681108704509</created>
@@ -209,7 +234,21 @@
       <option name="project" value="LOCAL" />
       <updated>1686657288836</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="배포">
+      <created>1686658944212</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1686658944212</updated>
+    </task>
+    <task id="LOCAL-00015" summary="배포">
+      <created>1686659054971</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1686659054971</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -245,15 +284,16 @@
     <MESSAGE value="." />
     <MESSAGE value="다시업로드" />
     <MESSAGE value="girignore위치" />
-    <option name="LAST_COMMIT_MESSAGE" value="girignore위치" />
+    <MESSAGE value="배포" />
+    <option name="LAST_COMMIT_MESSAGE" value="배포" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="django-line">
-          <url>file://$PROJECT_DIR$/community/templates/community/mypage_inf_change.html</url>
-          <line>4</line>
-          <option name="timeStamp" value="1" />
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/community/forms.py</url>
+          <line>41</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

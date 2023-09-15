@@ -27,3 +27,4 @@ class MyUser(AbstractUser):
     job_group = models.CharField(max_length=30, default="기타", choices=job_group_choices)
     gender_choices = (('남성', '님성'), ('여성', '여성'))
     gender = models.CharField(max_length=7, choices=gender_choices)
+
