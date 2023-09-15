@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="059f9401-954a-4c44-92e1-c0db3cf7862b" name="Changes" comment="배포">
-      <change afterPath="$PROJECT_DIR$/myblog/migrations/0006_alter_myblogphotopostcomment_content_and_more.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/likecatProject/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/likecatProject/settings.py" afterDir="false" />
-    </list>
+    <list default="true" id="059f9401-954a-4c44-92e1-c0db3cf7862b" name="Changes" comment="배포" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
