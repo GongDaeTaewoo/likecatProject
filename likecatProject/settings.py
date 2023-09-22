@@ -30,7 +30,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    ".ap-northeast-2.compute.amazonaws.com"
+    ".ap-northeast-2.compute.amazonaws.com",
+    "ec2-43-201-96-22.ap-northeast-2.compute.amazonaws.com "
 ]
 
 # Application definition
